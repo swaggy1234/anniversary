@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💕 Our Anniversary Gift Card 💕</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255, 182, 193, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 192, 203, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(255, 218, 185, 0.2) 0%, transparent 50%),
+                linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="hearts" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><text x="10" y="15" text-anchor="middle" font-size="12" fill="%23ffb6c1" opacity="0.1">💕</text></pattern></defs><rect width="100" height="100" fill="url(%23hearts)"/></svg>');
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            perspective: 1000px;
+            width: 100%;
+            max-width: 400px;
+            height: 600px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .card {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.8s ease-in-out;
+            cursor: pointer;
+        }
+
+        .card.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            box-shadow: 
+                0 20px 40px rgba(0,0,0,0.1),
+                0 0 0 1px rgba(255,255,255,0.5),
+                inset 0 1px 0 rgba(255,255,255,0.8);
+            overflow: hidden;
+        }
+
+        .card-front {
+            background: 
+                radial-gradient(circle at 30% 20%, rgba(255, 182, 193, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(255, 192, 203, 0.1) 0%, transparent 50%),
+                linear-gradient(145deg, #fff5f5, #ffe8e8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px;
+            border: 2px solid rgba(255, 182, 193, 0.3);
+        }
+
+        .card-back {
+            background: 
+                radial-gradient(circle at 30% 20%, rgba(255, 182, 193, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(255, 192, 203, 0.1) 0%, transparent 50%),
+                linear-gradient(145deg, #fff5f5, #ffe8e8);
+            transform: rotateY(180deg);
+            padding: 30px;
+            overflow-y: auto;
+            border: 2px solid rgba(255, 182, 193, 0.3);
+        }
+
+        .seal {
+            width: 80px;
+            height: 80px;
+            background: 
+                radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.3) 0%, transparent 50%),
+                linear-gradient(45deg, #ff6b9d, #ff8fab, #ffb6c1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 
+                0 15px 30px rgba(255, 107, 157, 0.4),
+                0 0 0 3px rgba(255, 255, 255, 0.8),
+                inset 0 2px 0 rgba(255, 255, 255, 0.5);
+            animation: pulse 2s infinite, sparkle 3s infinite;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+
+        .seal:hover {
+            transform: scale(1.1);
+            box-shadow: 
+                0 20px 40px rgba(255, 107, 157, 0.5),
+                0 0 0 4px rgba(255, 255, 255, 0.9),
+                inset 0 2px 0 rgba(255, 255, 255, 0.6);
+        }
+
+        .seal::before {
+            content: '✨';
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            font-size: 20px;
+            animation: twinkle 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes sparkle {
+            0%, 100% { box-shadow: 0 15px 30px rgba(255, 107, 157, 0.4), 0 0 0 3px rgba(255, 255, 255, 0.8), inset 0 2px 0 rgba(255, 255, 255, 0.5); }
+            50% { box-shadow: 0 15px 30px rgba(255, 107, 157, 0.6), 0 0 0 3px rgba(255, 255, 255, 0.9), inset 0 2px 0 rgba(255, 255, 255, 0.7); }
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .card-title {
+            font-size: 2.2em;
+            color: #d63384;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            font-weight: bold;
+            line-height: 1.2;
+        }
+
+        .card-subtitle {
+            font-size: 1.1em;
+            color: #8b5a96;
+            margin-bottom: 20px;
+            font-style: italic;
+            line-height: 1.3;
+        }
+
+        .open-instruction {
+            background: rgba(255,255,255,0.8);
+            padding: 15px;
+            border-radius: 15px;
+            color: #666;
+            font-size: 1em;
+            border: 2px dashed #ff6b9d;
+            margin-top: 20px;
+            line-height: 1.4;
+        }
+
+        .love-note {
+            background: linear-gradient(135deg, #ffeaa7, #fab1a0);
+            padding: 25px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border: 3px solid #fff;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.3em;
+            line-height: 1.6;
+            color: #2d3436;
+            text-align: center;
+        }
+
+        .photo-gallery {
+            margin: 20px 0;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .photo-item {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, #a8edea, #fed6e3);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 0.9em;
+            text-align: center;
+            border: 2px dashed #ffb6c1;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .photo-item:hover {
+            background: linear-gradient(135deg, #ffb6c1, #ffc0cb);
+            color: #333;
+            transform: scale(1.05);
+        }
+
+        .gift-selection {
+            margin-top: 20px;
+        }
+
+        .gift-selection h3 {
+            color: #d63031;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .gifts-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .gift-option {
+            background: linear-gradient(135deg, #fff, #f8f9fa);
+            border: 2px solid transparent;
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .gift-option:hover {
+            transform: translateY(-2px);
+            border-color: #ff6b9d;
+            box-shadow: 0 10px 25px rgba(255, 107, 157, 0.2);
+        }
+
+        .gift-option.selected {
+            border-color: #ff6b9d;
+            background: linear-gradient(135deg, #ffeaa7, #fab1a0);
+            transform: scale(1.02);
+        }
+
+        .gift-emoji {
+            font-size: 2em;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .gift-title {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #2d3436;
+            margin-bottom: 5px;
+        }
+
+        .gift-description {
+            color: #636e72;
+            font-size: 0.9em;
+            line-height: 1.3;
+        }
+
+        .submit-button {
+            background: linear-gradient(45deg, #ff6b9d, #ff8fab);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.1em;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(255, 107, 157, 0.3);
+            display: block;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(255, 107, 157, 0.4);
+        }
+
+        .submit-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .success-message {
+            background: linear-gradient(135deg, #00b894, #00cec9);
+            color: white;
+            padding: 15px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 15px;
+            display: none;
+            font-weight: 600;
+        }
+
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .heart {
+            position: absolute;
+            color: #ff6b9d;
+            font-size: 18px;
+            animation: float 6s ease-in-out infinite;
+            opacity: 0;
+            filter: drop-shadow(0 0 3px rgba(255, 107, 157, 0.5));
+        }
+
+        .heart:nth-child(odd) {
+            color: #ff8fab;
+            font-size: 16px;
+        }
+
+        .heart:nth-child(3n) {
+            color: #ffb6c1;
+            font-size: 20px;
+        }
+
+        @keyframes float {
+            0% {
+                opacity: 0;
+                transform: translateY(100vh) rotate(0deg) scale(0.5);
+            }
+            10% {
+                opacity: 1;
+                transform: translateY(90vh) rotate(36deg) scale(1);
+            }
+            50% {
+                transform: translateY(50vh) rotate(180deg) scale(1.2);
+            }
+            90% {
+                opacity: 1;
+                transform: translateY(10vh) rotate(324deg) scale(0.8);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) rotate(360deg) scale(0.3);
+            }
+        }
+
+        .back-button {
+            background: linear-gradient(45deg, #6c5ce7, #a29bfe);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                max-width: 350px;
+                height: 550px;
+            }
+            
+            .card-face {
+                padding: 20px;
+            }
+            
+            .card-title {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-hearts" id="hearts"></div>
+    
+    <div class="container">
+        <div class="card" id="card">
+            <div class="card-face card-front">
+                <div class="seal" onclick="flipCard()">💌</div>
+                <h1 class="card-title">Happy Anniversary!</h1>
+                <p class="card-subtitle">Click the seal to open your gift card</p>
+                <div class="open-instruction">
+                    ✨ A magical surprise awaits inside ✨<br>
+                    <small>Click the sparkling seal above</small>
+                </div>
+            </div>
+            
+            <div class="card-face card-back">
+                <button class="back-button" onclick="flipCard()">← Back</button>
+                
+                <div class="love-note">
+                    <h2>My Love</h2>
+                    <p>Happy Anniversary, my darling! 💕<br><br>
+                    I wanted to create something special for you to celebrate our love. You mean the world to me, and I can't wait to spend this special day making beautiful memories together.<br><br>
+                    Choose your perfect anniversary experience below, and let's make this day unforgettable!<br><br>
+                    With all my love,<br>
+                    Your Girlfriend 💖</p>
+                </div>
+
+                <div class="photo-gallery">
+                    <div class="photo-item">📸 Our First Date</div>
+                    <div class="photo-item">💕 Valentine's Day</div>
+                    <div class="photo-item">🌅 Beach Trip</div>
+                    <div class="photo-item">✨ Random Moments</div>
+                </div>
+
+                <div class="gift-selection">
+                    <h3>Choose Your Perfect Anniversary Experience</h3>
+                    <div class="gifts-grid">
+                        <div class="gift-option" data-gift="spa-day" onclick="selectGift(this)">
+                            <span class="gift-emoji">🧖‍♀️</span>
+                            <div class="gift-title">Spa Day</div>
+                            <div class="gift-description">Relaxing couples massage, facials, and pampering at a luxury spa</div>
+                        </div>
+                        
+                        <div class="gift-option" data-gift="hike" onclick="selectGift(this)">
+                            <span class="gift-emoji">🥾</span>
+                            <div class="gift-title">Adventure Hike</div>
+                            <div class="gift-description">Scenic mountain trail with a picnic lunch and breathtaking views</div>
+                        </div>
+                        
+                        <div class="gift-option" data-gift="dinner" onclick="selectGift(this)">
+                            <span class="gift-emoji">🍽️</span>
+                            <div class="gift-title">Romantic Dinner</div>
+                            <div class="gift-description">Fine dining at a beautiful restaurant with wine tasting</div>
+                        </div>
+                        
+                        <div class="gift-option" data-gift="weekend" onclick="selectGift(this)">
+                            <span class="gift-emoji">🏖️</span>
+                            <div class="gift-title">Weekend Getaway</div>
+                            <div class="gift-description">Cozy cabin retreat with hot tub and stargazing</div>
+                        </div>
+                        
+                        <div class="gift-option" data-gift="cooking" onclick="selectGift(this)">
+                            <span class="gift-emoji">👨‍🍳</span>
+                            <div class="gift-title">Cooking Class</div>
+                            <div class="gift-description">Learn to make gourmet dishes together with a professional chef</div>
+                        </div>
+                        
+                        <div class="gift-option" data-gift="surprise" onclick="selectGift(this)">
+                            <span class="gift-emoji">🎁</span>
+                            <div class="gift-title">Surprise Me!</div>
+                            <div class="gift-description">Let me plan something special and surprise you</div>
+                        </div>
+                    </div>
+                    
+                    <button class="submit-button" id="submitButton" onclick="submitChoice()" disabled>
+                        Send My Choice 💕
+                    </button>
+                    
+                    <div class="success-message" id="successMessage">
+                        <h3>💕 Thank you! 💕</h3>
+                        <p>Your choice has been sent! I can't wait to make this anniversary special for you!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedGift = null;
+
+        function flipCard() {
+            const card = document.getElementById('card');
+            card.classList.toggle('flipped');
+            createFloatingHearts();
+        }
+
+        function selectGift(element) {
+            // Remove previous selection
+            document.querySelectorAll('.gift-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // Add selection to clicked option
+            element.classList.add('selected');
+            selectedGift = element.dataset.gift;
+            
+            // Enable submit button
+            document.getElementById('submitButton').disabled = false;
+        }
+
+        function submitChoice() {
+            if (!selectedGift) return;
+            
+            const giftNames = {
+                'spa-day': 'Spa Day',
+                'hike': 'Adventure Hike',
+                'dinner': 'Romantic Dinner',
+                'weekend': 'Weekend Getaway',
+                'cooking': 'Cooking Class',
+                'surprise': 'Surprise Me!'
+            };
+            
+            const selectedGiftName = giftNames[selectedGift];
+            
+            // Create email content
+            const subject = `Anniversary Gift Choice from My Love`;
+            const body = `Hi! 
+
+My Love has chosen their anniversary gift: ${selectedGiftName}
+
+Love Note:
+Happy Anniversary, my darling! 💕
+
+I wanted to create something special for you to celebrate our love. You mean the world to me, and I can't wait to spend this special day making beautiful memories together.
+
+Choose your perfect anniversary experience below, and let's make this day unforgettable! 
+
+With all my love,
+Your Girlfriend 💖
+
+This was sent from the anniversary gift card website.
+
+Best regards,
+The Anniversary Gift System 💕`;
+
+            // Open email client
+            const mailtoLink = `mailto:sraghvia@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            window.open(mailtoLink);
+            
+            // Show success message
+            document.getElementById('successMessage').style.display = 'block';
+            document.getElementById('submitButton').disabled = true;
+            
+            // Create more floating hearts
+            createFloatingHearts();
+        }
+
+        function createFloatingHearts() {
+            const heartsContainer = document.getElementById('hearts');
+            const heartCount = 15;
+            
+            for (let i = 0; i < heartCount; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart';
+                    heart.innerHTML = '💕';
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.animationDelay = Math.random() * 2 + 's';
+                    heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+                    heartsContainer.appendChild(heart);
+                    
+                    // Remove heart after animation
+                    setTimeout(() => {
+                        if (heart.parentNode) {
+                            heart.parentNode.removeChild(heart);
+                        }
+                    }, 8000);
+                }, i * 150);
+            }
+        }
+
+        // Initialize floating hearts on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            createFloatingHearts();
+        });
+    </script>
+</body>
+</html>
