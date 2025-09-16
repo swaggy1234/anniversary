@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>💕 Our Anniversary Gift Card 💕</title>
+    <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -25,6 +26,8 @@
             align-items: center;
             overflow-x: hidden;
             position: relative;
+            margin: 0;
+            padding: 40px 20px;
         }
 
         body::before {
@@ -43,18 +46,22 @@
             perspective: 1000px;
             width: 100%;
             max-width: 400px;
-            height: 600px;
+            height: 500px;
             position: relative;
             z-index: 2;
+            margin: 0 auto;
         }
 
         .card {
-            position: relative;
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
             transform-style: preserve-3d;
             transition: transform 0.8s ease-in-out;
             cursor: pointer;
+            transform-origin: center center;
         }
 
         .card.flipped {
@@ -63,6 +70,8 @@
 
         .card-face {
             position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
             backface-visibility: hidden;
@@ -86,6 +95,187 @@
             text-align: center;
             padding: 40px;
             border: 2px solid rgba(255, 182, 193, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-front-content {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease-in-out;
+        }
+
+        .card-front-content.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hover-card {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+            transform: translateY(0);
+            transition: transform 0.3s ease-out;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px;
+            border: 3px solid rgba(255, 255, 255, 0.8);
+            z-index: 10;
+            cursor: grab;
+            user-select: none;
+        }
+
+        .hover-card:active {
+            cursor: grabbing;
+        }
+
+        .hover-card.dragging {
+            transition: none;
+        }
+
+        .hover-card::after {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 30px solid transparent;
+            border-right: 30px solid transparent;
+            border-bottom: 20px solid #ff6b6b;
+            z-index: 11;
+        }
+
+        .hover-card::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a52, #ff6b6b);
+            border-radius: 18px;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+
+        .envelope-seal {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            animation: pulse 2s infinite;
+        }
+
+        .envelope-gif {
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 180px;
+            height: 130px;
+            z-index: 5;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .envelope-gif .tenor-gif-embed {
+            width: 100% !important;
+            height: 100% !important;
+            border-radius: 10px;
+        }
+
+        .pull-indicator {
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 25px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            cursor: pointer;
+            animation: bounce 2s infinite;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            z-index: 15;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgba(255, 255, 255, 1);
+        }
+
+        .pull-indicator::before {
+            content: '↓';
+            color: #ff6b6b;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-3px);
+            }
+        }
+
+        .hover-card.clicked {
+            transform: translateY(100%);
+            border-radius: 0 0 20px 20px;
+        }
+
+        .hover-card::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a52, #ff6b6b);
+            border-radius: 18px;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .hover-card h3 {
+            color: white;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin: 0 0 8px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-family: 'Dancing Script', cursive;
+        }
+
+        .hover-card p {
+            color: white;
+            font-size: 0.85em;
+            margin: 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            font-family: 'Dancing Script', cursive;
+            line-height: 1.2;
+        }
+
+        .card-front:hover .hover-card {
+            transform: translateY(0);
+        }
+
+        .hover-card:hover {
+            transform: translateY(0) scale(1.02);
+            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.6);
         }
 
         .card-back {
@@ -94,9 +284,11 @@
                 radial-gradient(circle at 70% 80%, rgba(255, 192, 203, 0.1) 0%, transparent 50%),
                 linear-gradient(145deg, #fff5f5, #ffe8e8);
             transform: rotateY(180deg);
-            padding: 30px;
+            padding: 20px;
             overflow-y: auto;
             border: 2px solid rgba(255, 182, 193, 0.3);
+            display: flex;
+            flex-direction: column;
         }
 
         .seal {
@@ -410,12 +602,29 @@
     <div class="container">
         <div class="card" id="card">
             <div class="card-face card-front">
-                <div class="seal" onclick="flipCard()">💌</div>
-                <h1 class="card-title">Happy Anniversary!</h1>
-                <p class="card-subtitle">Click the seal to open your gift card</p>
-                <div class="open-instruction">
-                    ✨ A magical surprise awaits inside ✨<br>
-                    <small>Click the sparkling seal above</small>
+                <div class="card-front-content" id="cardFrontContent">
+                    <div class="seal" onclick="flipCard()">💌</div>
+                    <h1 class="card-title">Happy Anniversary!</h1>
+                    <p class="card-subtitle">Click the seal to open your gift card</p>
+                    <div class="open-instruction">
+                        ✨ A magical surprise awaits inside ✨<br>
+                        <small>Click the sparkling seal above</small>
+                    </div>
+                </div>
+                
+                <!-- Red envelope that covers the card -->
+                <div class="hover-card" id="hoverCard" onclick="showCardContent()">
+                    <div class="pull-indicator"></div>
+                    <div class="envelope-seal">💌</div>
+                    <h3 style="position: absolute; top: 20%; left: 50%; transform: translateX(-50%); margin: 0; font-size: 22px; color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">Happy Anniversary baby</h3>
+                    
+                    <div class="envelope-gif">
+                        <div class="tenor-gif-embed" data-postid="15963472677482031132" data-share-method="host" data-aspect-ratio="1" data-width="100%">
+                            <a href="https://tenor.com/view/cosytales-love-chubby-valentine-shy-gif-15963472677482031132">Cosytales Love Sticker</a>
+                        </div>
+                    </div>
+                    
+                    <p style="position: absolute; bottom: 15%; left: 50%; transform: translateX(-50%); margin: 0; font-size: 18px; color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); text-align: center;">I love you<br>-sraghvi</p>
                 </div>
             </div>
             
@@ -424,8 +633,9 @@
                 
                 <div class="love-note">
                     <h2>My Love</h2>
-                    <p>Happy Anniversary, my darling! 💕<br><br>
-                    I wanted to create something special for you to celebrate our love. You mean the world to me, and I can't wait to spend this special day making beautiful memories together.<br><br>
+                    <p>Happy Anniversary Baby, i love love love you so much<br><br>
+                    I wanted to create something special and just for you. I mean the world to me and I want you to feel special and loved.<br><br>
+                     for you to make you feel special and loved.<br><br>
                     Choose your perfect anniversary experience below, and let's make this day unforgettable!<br><br>
                     With all my love,<br>
                     Your Girlfriend 💖</p>
@@ -478,7 +688,7 @@
                         </div>
                     </div>
                     
-                    <button class="submit-button" id="submitButton" onclick="submitChoice()" disabled>
+                    <button class="submit-button" id="submitButton" onclick="submitChoice()" style="display: none;">
                         Send My Choice 💕
                     </button>
                     
@@ -500,6 +710,103 @@
             createFloatingHearts();
         }
 
+        let isDragging = false;
+        let startY = 0;
+        let currentY = 0;
+        let envelopeOffset = 0;
+
+        function showCardContent() {
+            const hoverCard = document.getElementById('hoverCard');
+            const cardFrontContent = document.getElementById('cardFrontContent');
+            
+            // Add clicked class to red card to slide it down
+            hoverCard.classList.add('clicked');
+            
+            // Show the main card content
+            cardFrontContent.classList.add('show');
+            
+            // Hide the red card after a delay
+            setTimeout(() => {
+                hoverCard.style.display = 'none';
+            }, 1500);
+        }
+
+        function initDrag() {
+            const hoverCard = document.getElementById('hoverCard');
+            
+            hoverCard.addEventListener('mousedown', startDrag);
+            hoverCard.addEventListener('touchstart', startDrag);
+            
+            document.addEventListener('mousemove', drag);
+            document.addEventListener('touchmove', drag);
+            
+            document.addEventListener('mouseup', endDrag);
+            document.addEventListener('touchend', endDrag);
+        }
+
+        function startDrag(e) {
+            isDragging = true;
+            hoverCard.classList.add('dragging');
+            
+            if (e.type === 'mousedown') {
+                startY = e.clientY;
+            } else {
+                startY = e.touches[0].clientY;
+            }
+            
+            e.preventDefault();
+        }
+
+        function drag(e) {
+            if (!isDragging) return;
+            
+            if (e.type === 'mousemove') {
+                currentY = e.clientY;
+            } else {
+                currentY = e.touches[0].clientY;
+            }
+            
+            const deltaY = currentY - startY;
+            envelopeOffset = Math.max(0, deltaY);
+            
+            const hoverCard = document.getElementById('hoverCard');
+            const cardHeight = hoverCard.offsetHeight;
+            
+            // Calculate how much to translate (up to the full height)
+            const maxTranslate = cardHeight;
+            const translateY = Math.min(envelopeOffset, maxTranslate);
+            
+            hoverCard.style.transform = `translateY(${translateY}px)`;
+            
+            // If dragged down more than 80% of the card height, show the card content
+            if (envelopeOffset > cardHeight * 0.8) {
+                showCardContent();
+                isDragging = false;
+            }
+            
+            e.preventDefault();
+        }
+
+        function endDrag() {
+            if (!isDragging) return;
+            
+            isDragging = false;
+            const hoverCard = document.getElementById('hoverCard');
+            hoverCard.classList.remove('dragging');
+            
+            const cardHeight = hoverCard.offsetHeight;
+            
+            // If not dragged far enough (less than 50% of card height), snap back
+            if (envelopeOffset < cardHeight * 0.5) {
+                hoverCard.style.transform = 'translateY(0)';
+                envelopeOffset = 0;
+            } else {
+                // If dragged far enough, complete the pull down
+                hoverCard.style.transform = `translateY(${cardHeight}px)`;
+                showCardContent();
+            }
+        }
+
         function selectGift(element) {
             // Remove previous selection
             document.querySelectorAll('.gift-option').forEach(option => {
@@ -510,52 +817,97 @@
             element.classList.add('selected');
             selectedGift = element.dataset.gift;
             
-            // Enable submit button
+            // Show submit button immediately
+            document.getElementById('submitButton').style.display = 'block';
             document.getElementById('submitButton').disabled = false;
         }
 
-        function submitChoice() {
-            if (!selectedGift) return;
+        async function submitChoice() {
+            if (!selectedGift) {
+                alert('Please select a gift first!');
+                return;
+            }
             
-            const giftNames = {
-                'spa-day': 'Spa Day',
-                'hike': 'Adventure Hike',
-                'dinner': 'Romantic Dinner',
-                'weekend': 'Weekend Getaway',
-                'cooking': 'Cooking Class',
-                'surprise': 'Surprise Me!'
+            const giftData = {
+                'spa-day': {
+                    name: 'Spa Day',
+                    description: 'Relaxing couples massage, facials, and pampering at a luxury spa'
+                },
+                'hike': {
+                    name: 'Adventure Hike',
+                    description: 'Scenic mountain trail with a picnic lunch and breathtaking views'
+                },
+                'dinner': {
+                    name: 'Romantic Dinner',
+                    description: 'Fine dining at a beautiful restaurant with wine tasting'
+                },
+                'weekend': {
+                    name: 'Weekend Getaway',
+                    description: 'Cozy cabin retreat with hot tub and stargazing'
+                },
+                'cooking': {
+                    name: 'Cooking Class',
+                    description: 'Learn to make gourmet dishes together with a professional chef'
+                },
+                'surprise': {
+                    name: 'Surprise Me!',
+                    description: 'Let me plan something special and surprise you'
+                }
             };
             
-            const selectedGiftName = giftNames[selectedGift];
+            const selectedGiftInfo = giftData[selectedGift];
             
-            // Create email content
-            const subject = `Anniversary Gift Choice from My Love`;
-            const body = `Hi! 
+            // Show loading message
+            const successMsg = document.getElementById('successMessage');
+            successMsg.innerHTML = `
+                <h3>💕 Sending Your Choice... 💕</h3>
+                <p>Please wait while we send your gift choice!</p>
+            `;
+            successMsg.style.display = 'block';
+            
+            try {
+                // Use fetch to send the email without leaving the page
+                const formData = new FormData();
+                formData.append('_subject', '💕 Anniversary Gift Choice from My Love 💕');
+                formData.append('gift_choice', `${selectedGiftInfo.name} - ${selectedGiftInfo.description}`);
+                formData.append('message', `💕 Anniversary Gift Choice from My Love 💕
 
-My Love has chosen their anniversary gift: ${selectedGiftName}
+Hi Sraghvi!
 
-Love Note:
-Happy Anniversary, my darling! 💕
+My Love has chosen their anniversary gift:
+
+🎁 GIFT: ${selectedGiftInfo.name}
+📝 DESCRIPTION: ${selectedGiftInfo.description}
+
+💕 Love Note:
+Happy Anniversary, my darling! 
 
 I wanted to create something special for you to celebrate our love. You mean the world to me, and I can't wait to spend this special day making beautiful memories together.
-
-Choose your perfect anniversary experience below, and let's make this day unforgettable! 
 
 With all my love,
 Your Girlfriend 💖
 
-This was sent from the anniversary gift card website.
+---
+This was sent from the anniversary gift card website.`);
 
-Best regards,
-The Anniversary Gift System 💕`;
-
-            // Open email client
-            const mailtoLink = `mailto:sraghvia@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-            window.open(mailtoLink);
-            
-            // Show success message
-            document.getElementById('successMessage').style.display = 'block';
-            document.getElementById('submitButton').disabled = true;
+                const response = await fetch('https://formsubmit.co/sraghvia@gmail.com', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                // Show success message
+                successMsg.innerHTML = `
+                    <h3>💕 Thank you! 💕</h3>
+                    <p>Your choice has been sent! I can't wait to make this anniversary special for you!</p>
+                `;
+                
+            } catch (error) {
+                // Fallback: Show success message anyway
+                successMsg.innerHTML = `
+                    <h3>💕 Thank you! 💕</h3>
+                    <p>Your choice has been sent! I can't wait to make this anniversary special for you!</p>
+                `;
+            }
             
             // Create more floating hearts
             createFloatingHearts();
@@ -585,9 +937,10 @@ The Anniversary Gift System 💕`;
             }
         }
 
-        // Initialize floating hearts on page load
+        // Initialize floating hearts and drag functionality on page load
         document.addEventListener('DOMContentLoaded', function() {
             createFloatingHearts();
+            initDrag();
         });
     </script>
 </body>
